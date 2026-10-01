@@ -38,4 +38,14 @@ public class ReservaController {
     public ResponseEntity<Reserva> buscar(@PathVariable String id) {
         return ResponseEntity.ok(service.buscar(id));
     }
+
+    @PutMapping("/{id}/confirmar")
+    public ResponseEntity<Reserva> confirmar(@PathVariable String id) {
+        return ResponseEntity.ok(service.confirmar(id));
+    }
+
+    @ExceptionHandler(IllegalArgumentException.class)
+    public ResponseEntity<String> manejarIllegalArgument(IllegalArgumentException ex) {
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
+    }
 }
